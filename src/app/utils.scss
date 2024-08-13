@@ -1,0 +1,149 @@
+// colours
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #6c757d;
+$gray-dark: #343a40;
+$primary: #007bff;
+$secondary: #6c757d;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+$dark-900: #000;
+$oilblack: #0c0c0c;
+$obsidian: #0b1215;
+$darkslategrey: #0d1717;
+$midnightBlue: #101720;
+$charcoalgray: #171717;
+$deepnavyblue: #011222;
+$richblack: #020d19;
+
+// Sizes
+$size-2xs: 0.5rem; /*8px*/
+$size-xs: 0.75rem; /*12px*/
+$size-s: 0.875rem; /*14px*/
+$size-base: 1rem; /*16px*/
+$size-lg: 1.125rem; /*18px*/
+$size-xl: 1.25rem; /*20px*/
+$size-2xl: 1.5rem; /*24px*/
+$size-3xl: 1.875rem; /*30px*/
+$size-4xl: 2rem; /*32px*/
+$size-5xl: 2.25rem; /*36px*/
+$size-6xl: 3rem; /*48px*/
+$size-7xl: 3.75rem; /*60px*/
+$size-8xl: 4.5rem; /*72px*/
+$size-9xl: 6rem; /*96px*/
+$size-10xl: 8rem; /*128px*/
+$size-11xl: 10rem; /*160px*/
+
+// functions
+@mixin b-r {
+  border: 1px solid red;
+}
+
+@mixin flex-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-cc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin h1 {
+  font-size: clamp($size-2xl, 3vw, $size-5xl);
+  font-weight: 700;
+}
+
+@mixin h2 {
+  font-size: clamp($size-xl, 2vw, $size-4xl);
+  font-weight: 600;
+}
+
+@mixin p {
+  font-size: clamp($size-base, 2vw, $size-xl);
+  font-weight: 400;
+}
+
+.section {
+  margin-top: 3.5rem;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+// 3xs
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
+  }
+}
+
+// 2xs
+@media (min-width: 375px) {
+  .container {
+    max-width: 375px;
+  }
+}
+
+// xs
+@media (min-width: 475px) {
+  .container {
+    max-width: 475px;
+  }
+}
+
+// sm
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+// md
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+// lg
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+// xl
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+// 2xl
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
