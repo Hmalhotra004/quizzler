@@ -7,9 +7,11 @@ const Quiz = () => {
   const [userAns, setUserAns] = useState([0]);
   const activeQuestionIndex = userAns.length;
 
-  const handleSelectAnswer = selectedAns => {
+  const handleSelectAnswer = (selectedAns: string) => {
+    // selectedAns shud be of type number
+    const selectAnsInt = parseInt(selectedAns); //change it
     setUserAns(pv => {
-      return [...pv, selectedAns];
+      return [...pv, selectAnsInt];
     });
   };
 
