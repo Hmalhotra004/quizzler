@@ -1,10 +1,10 @@
 "use client";
 import questions from "@/lib/questions";
 import "@/styles/quiz.scss";
-import "@/styles/summary.scss";
-import { motion } from "framer-motion";
+
 import { useCallback, useState } from "react";
 import Question from "./Question";
+import Summary from "./Summary";
 
 const Quiz = () => {
   const [userAns, setUserAns] = useState<(string | null)[]>([]);
@@ -21,15 +21,7 @@ const Quiz = () => {
   const handleSkipAns = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
 
   if (quizIsComplete) {
-    return (
-      <div id="summary">
-        <motion.img
-          src="/quiz-complete.png"
-          alt="Trophy Icon"
-        />
-        <h2>Quiz Completed</h2>
-      </div>
-    );
+    return <Summary userAnswers={userAns} />;
   }
 
   return (
