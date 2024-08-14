@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const Quiz = () => {
-  const [userAns, setUserAns] = useState([0]);
+  const [userAns, setUserAns] = useState(["0"]);
 
   const activeQuestionIndex = userAns.length;
 
@@ -16,7 +16,7 @@ const Quiz = () => {
     // selectedAns shud be of type number
     const selectAnsInt = parseInt(selectedAns); //change it
     setUserAns(pv => {
-      return [...pv, selectAnsInt];
+      return [...pv, selectedAns];
     });
   };
 
