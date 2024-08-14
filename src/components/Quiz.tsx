@@ -4,20 +4,19 @@ import styles from "@/styles/quiz.module.scss";
 import stylesSum from "@/styles/summary.module.scss";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import QuestionTimer from "./QuestionTimer";
 
 const Quiz = () => {
-  const [userAns, setUserAns] = useState(["0"]);
+  const [userAns, setUserAns] = useState<(number | null)[]>([]);
 
   const activeQuestionIndex = userAns.length;
 
   const quizIsComplete = activeQuestionIndex === questions.length;
 
-  const handleSelectAnswer = (selectedAns: string) => {
+  const handleSelectAnswer = (selectedAns: string | null) => {
     // selectedAns shud be of type number
-    const selectAnsInt = parseInt(selectedAns); //change it
-    setUserAns(pv => {
-      return [...pv, selectedAns];
-    });
+    const selectedAnsInt = selectedAns !== null ? parseInt(selectedAns) : null; //change it
+    setUserAns(pv => [...pv, selectedAnsInt]);
   };
 
   if (quizIsComplete) {
@@ -39,6 +38,10 @@ const Quiz = () => {
     <>
       <section id={styles.quiz}>
         <div id={styles.question}>
+          <QuestionTimer
+            timeout={10000}
+            onTimeout={() => handleSelectAnswer(null)}
+          />
           <h2>{questions[activeQuestionIndex].text}</h2>
           <ul id={styles.answers}>
             {shuffledAns.map(answer => (
