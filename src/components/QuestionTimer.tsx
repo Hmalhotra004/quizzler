@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 
 type Props = {
   timeout: number;
-  onTimeout: () => void;
+  onTimeout: false | (() => void);
+  mode: string;
 };
 
-const QuestionTimer = ({ timeout, onTimeout }: Props) => {
+const QuestionTimer = ({ timeout, onTimeout, mode }: Props) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    const timer = setTimeout(() => onTimeout(), timeout);
+    const checkTimeout = () => {
+      if (onTimeout) {
+        onTimeout();
+      }
+    };
+    const timer = setTimeout(checkTimeout, timeout);
     return () => {
       clearTimeout(timer);
     };
@@ -30,6 +36,7 @@ const QuestionTimer = ({ timeout, onTimeout }: Props) => {
       id="question-time"
       max={timeout}
       value={remainingTime}
+      className={mode}
     />
   );
 };
