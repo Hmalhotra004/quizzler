@@ -10,7 +10,7 @@ const QuestionTimer = ({ timeout, onTimeout }: Props) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    const timer = setTimeout(() => onTimeout, timeout);
+    const timer = setTimeout(() => onTimeout(), timeout);
     return () => {
       clearTimeout(timer);
     };

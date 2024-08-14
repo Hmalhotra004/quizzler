@@ -10,12 +10,15 @@ const Quiz = () => {
   const [userAns, setUserAns] = useState<(number | null)[]>([]);
 
   const activeQuestionIndex = userAns.length;
-
   const quizIsComplete = activeQuestionIndex === questions.length;
 
   const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAns: string | null) {
-    const selectedAnsInt = selectedAns !== null ? parseInt(selectedAns) : null; //change it
-    setUserAns(pv => [...pv, selectedAnsInt]);
+    const selectedAnsInt = selectedAns !== null ? parseInt(selectedAns) : null;
+    console.log("yo");
+    setUserAns(pv => {
+      return [...pv, selectedAnsInt];
+    });
+    console.log("ho");
   }, []);
 
   const handleSkipAns = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
