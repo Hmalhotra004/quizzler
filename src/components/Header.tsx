@@ -1,10 +1,10 @@
 "use client";
-import Styles from "@/styles/header.module.scss";
+import "@/styles/header.scss";
 import { motion } from "framer-motion";
 
 const Header = () => {
   return (
-    <header className={Styles.head}>
+    <header className="head">
       <motion.img
         src="/quiz-logo.png"
         alt="Quiz Logo"
