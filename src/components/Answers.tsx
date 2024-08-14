@@ -36,6 +36,7 @@ const Answers = ({ answers, selectedAns, answerState, onSelect }: Props) => {
             <button
               onClick={() => onSelect(answer)}
               className={cssClass}
+              disabled={answerState !== ""}
             >
               {answer}
             </button>
