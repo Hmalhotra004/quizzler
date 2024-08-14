@@ -40,7 +40,8 @@ const Quiz = () => {
       <section id={styles.quiz}>
         <div id={styles.question}>
           <QuestionTimer
-            timeout={10000}
+            key={activeQuestionIndex}
+            timeout={5000}
             onTimeout={handleSkipAns}
           />
           <h2>{questions[activeQuestionIndex].text}</h2>

@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -11,13 +10,19 @@ const QuestionTimer = ({ timeout, onTimeout }: Props) => {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    setTimeout(() => onTimeout, timeout);
+    const timer = setTimeout(() => onTimeout, timeout);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [timeout, onTimeout]);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setRemainingTime(pv => pv - 10);
     }, 10);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
