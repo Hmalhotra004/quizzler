@@ -3,7 +3,7 @@ import questions from "@/lib/questions";
 import styles from "@/styles/quiz.module.scss";
 import stylesSum from "@/styles/summary.module.scss";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import QuestionTimer from "./QuestionTimer";
 
 const Quiz = () => {
@@ -13,11 +13,12 @@ const Quiz = () => {
 
   const quizIsComplete = activeQuestionIndex === questions.length;
 
-  const handleSelectAnswer = (selectedAns: string | null) => {
-    // selectedAns shud be of type number
+  const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAns: string | null) {
     const selectedAnsInt = selectedAns !== null ? parseInt(selectedAns) : null; //change it
     setUserAns(pv => [...pv, selectedAnsInt]);
-  };
+  }, []);
+
+  const handleSkipAns = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
 
   if (quizIsComplete) {
     return (
@@ -40,7 +41,7 @@ const Quiz = () => {
         <div id={styles.question}>
           <QuestionTimer
             timeout={10000}
-            onTimeout={() => handleSelectAnswer(null)}
+            onTimeout={handleSkipAns}
           />
           <h2>{questions[activeQuestionIndex].text}</h2>
           <ul id={styles.answers}>
