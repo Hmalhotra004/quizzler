@@ -11,19 +11,19 @@ type Props = {
 const Form = ({ isStart }: Props) => {
   const { setQuestion } = useContext(QContext);
 
-  const handleFormSub = (e: React.FormEvent) => {
+  const handleFormSub = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    PullJson(10, 9, "easy");
+    await PullJson(10, 9, "easy");
 
     isStart(true);
   };
 
-  const PullJson = (amount: number, category: number, difficulty: string) => {
+  const PullJson = async (amount: number, category: number, difficulty: string) => {
     const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
     // const api = `https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`;
 
-    axios
+    await axios
       .get(api)
       .then(res => {
         setQuestion(res.data.results);
