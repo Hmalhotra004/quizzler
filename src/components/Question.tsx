@@ -58,12 +58,12 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
 
   return (
     <div id="question">
-      {/* <QuestionTimer
+      <QuestionTimer
         key={timer}
         timeout={timer}
         onTimeout={answer.selectedAns === "" && onSkipAns}
         mode={answerState}
-      /> */}
+      />
       <h2>{questions[index].text}</h2>
       <Answers
         answers={questions[index].answers}
