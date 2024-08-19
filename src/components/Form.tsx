@@ -2,7 +2,7 @@
 import { QContext } from "@/Context/QContext";
 import "@/styles/form.scss";
 import axios from "axios";
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { Dispatch, SetStateAction, useContext, useRef } from "react";
 
 type Props = {
   isStart: Dispatch<SetStateAction<boolean>>;
@@ -10,11 +10,18 @@ type Props = {
 
 const Form = ({ isStart }: Props) => {
   const { setQuestion } = useContext(QContext);
+  const cateref = useRef<HTMLSelectElement>(null);
+  const amtref = useRef<HTMLInputElement>(null);
+  const diffref = useRef<HTMLSelectElement>(null);
 
   const handleFormSub = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await PullJson(10, 9, "easy");
+    const amt = amtref.current!.valueAsNumber;
+    const cat = parseInt(cateref.current!.value);
+    const diff = diffref.current!.value;
+
+    await PullJson(amt, cat, diff);
 
     isStart(true);
   };
@@ -39,7 +46,10 @@ const Form = ({ isStart }: Props) => {
         onSubmit={handleFormSub}
       >
         <label htmlFor="Category">Select Category: </label>
-        <select name="Category">
+        <select
+          name="Category"
+          ref={cateref}
+        >
           <option value="">Any Category</option>
           <option value={9}>General Knownledge</option>
           <option value={10}>Animals</option>
@@ -57,10 +67,15 @@ const Form = ({ isStart }: Props) => {
         <input
           type="number"
           defaultValue={10}
+          ref={amtref}
+          max={50}
         />
 
         <label htmlFor="Difficulty">Select Difficulty: </label>
-        <select name="Difficulty">
+        <select
+          name="Difficulty"
+          ref={diffref}
+        >
           <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
