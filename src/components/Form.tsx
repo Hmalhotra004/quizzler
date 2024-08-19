@@ -1,16 +1,35 @@
 "use client";
+import { QContext } from "@/Context/QContext";
 import "@/styles/form.scss";
-import React, { Dispatch, SetStateAction } from "react";
+import axios from "axios";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 
 type Props = {
   isStart: Dispatch<SetStateAction<boolean>>;
 };
 
 const Form = ({ isStart }: Props) => {
+  const { setQuestion } = useContext(QContext);
+
   const handleFormSub = (e: React.FormEvent) => {
     e.preventDefault();
 
+    PullJson(10, 9, "easy");
+
     isStart(true);
+  };
+
+  const PullJson = (amount: number, category: number, difficulty: string) => {
+    const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+    // const api = `https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`;
+
+    axios
+      .get(api)
+      .then(res => {
+        setQuestion(res.data.results);
+        console.log(res.data.results);
+      })
+      .catch(error => console.log(error));
   };
 
   return (

@@ -7,10 +7,11 @@ import { useState } from "react";
 
 const Home = () => {
   const [quizOn, setQuizOn] = useState(false);
+  const [questions, setQuestions] = useState([]);
   return (
     <>
       <Header />
-      {!quizOn ? <Form isStart={setQuizOn}/> : <Quiz />}
+      {!quizOn ? <Form isStart={setQuizOn} /> : <Quiz />}
     </>
   );
 };
