@@ -52,7 +52,7 @@ const Form = ({ isStart }: Props) => {
         >
           <option value="">Any Category</option>
           <option value={9}>General Knownledge</option>
-          <option value={10}>Animals</option>
+          <option value={27}>Animals</option>
           <option value={15}>Video Games</option>
           <option value={12}>Music</option>
           <option value={18}>Science: Computers</option>
