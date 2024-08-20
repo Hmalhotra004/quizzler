@@ -1,12 +1,13 @@
 "use client";
-import questions from "@/lib/questions";
 import "@/styles/quiz.scss";
 
-import { useCallback, useState } from "react";
+import { QContext } from "@/Context/QContext";
+import { Dispatch, SetStateAction, useCallback, useContext, useState } from "react";
 import Question from "./Question";
 import Summary from "./Summary";
 
-const Quiz = () => {
+const Quiz = ({ setQuiz }: { setQuiz: Dispatch<SetStateAction<boolean>> }) => {
+  const { questions } = useContext(QContext);
   const [userAns, setUserAns] = useState<(string | null)[]>([]);
 
   const activeQuestionIndex = userAns.length;
@@ -21,7 +22,12 @@ const Quiz = () => {
   const handleSkipAns = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
 
   if (quizIsComplete) {
-    return <Summary userAnswers={userAns} />;
+    return (
+      <Summary
+        userAnswers={userAns}
+        setQuiz={setQuiz}
+      />
+    );
   }
 
   return (

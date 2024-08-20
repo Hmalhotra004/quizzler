@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <Context>
       <Header />
-      {!quizOn ? <Form isStart={setQuizOn} /> : <Quiz />}
+      {!quizOn ? <Form isStart={setQuizOn} /> : <Quiz setQuiz={setQuizOn} />}
     </Context>
   );
 };

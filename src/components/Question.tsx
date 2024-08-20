@@ -1,5 +1,5 @@
-import questions from "@/lib/questions";
-import { useState } from "react";
+import { QContext } from "@/Context/QContext";
+import { useContext, useState } from "react";
 import Answers from "./Answers";
 import QuestionTimer from "./QuestionTimer";
 
@@ -15,6 +15,7 @@ type AnswerState = {
 };
 
 const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
+  const { questions } = useContext(QContext);
   const [answer, setAnswer] = useState<AnswerState>({
     selectedAns: "",
     isCorrect: null,
@@ -39,7 +40,7 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
     setTimeout(() => {
       setAnswer({
         selectedAns: answer,
-        isCorrect: questions[index].answers[0] === answer,
+        isCorrect: questions[index].correct_answer === answer,
       });
 
       setTimeout(() => {
@@ -64,9 +65,9 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
         onTimeout={answer.selectedAns === "" && onSkipAns}
         mode={answerState}
       />
-      <h2>{questions[index].text}</h2>
+      <h2>{questions[index].question}</h2>
       <Answers
-        answers={questions[index].answers}
+        answers={questions[index].incorrect_answers.concat(questions[index].correct_answer)}
         selectedAns={answer.selectedAns}
         answerState={answerState}
         onSelect={handleSelectAns}

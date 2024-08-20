@@ -1,18 +1,26 @@
-import questions from "@/lib/questions";
+// import questions from "@/lib/questions";
+import { QContext } from "@/Context/QContext";
 import "@/styles/summary.scss";
 import { motion } from "framer-motion";
+import { Dispatch, SetStateAction, useContext } from "react";
 
 type Props = {
   userAnswers: (string | null)[];
+  setQuiz: Dispatch<SetStateAction<boolean>>;
 };
 
-const Summary = ({ userAnswers }: Props) => {
+const Summary = ({ userAnswers, setQuiz }: Props) => {
+  const { questions } = useContext(QContext);
   const skippedAns = userAnswers.filter(answer => answer === null);
-  const correctAns = userAnswers.filter((answer, idx) => answer === questions[idx].answers[0]);
+  const correctAns = userAnswers.filter((answer, idx) => answer === questions[idx].correct_answer);
 
   const skippedAnsPer = Math.round((skippedAns.length / userAnswers.length) * 100);
   const correctAnsPer = Math.round((correctAns.length / userAnswers.length) * 100);
   const wrongAnsPer = 100 - skippedAnsPer - correctAnsPer;
+
+  const handleQuizChange = () => {
+    setQuiz(false);
+  };
 
   return (
     <div id="summary">
@@ -41,7 +49,7 @@ const Summary = ({ userAnswers }: Props) => {
 
           if (answer === null) {
             cssClass += " skipped";
-          } else if (answer === questions[idx].answers[0]) {
+          } else if (answer === questions[idx].correct_answer) {
             cssClass += " correct";
           } else {
             cssClass += " wrong";
@@ -50,12 +58,18 @@ const Summary = ({ userAnswers }: Props) => {
           return (
             <li key={idx}>
               <h3>{idx + 1}</h3>
-              <p className="question">{questions[idx].text}</p>
+              <p className="question">{questions[idx].question}</p>
               <p className={cssClass}>{answer ?? "Skipped"}</p>
             </li>
           );
         })}
       </ol>
+      <button
+        onClick={handleQuizChange}
+        id="again-btn"
+      >
+        Another Quiz
+      </button>
     </div>
   );
 };

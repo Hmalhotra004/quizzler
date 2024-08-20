@@ -1,7 +1,16 @@
 import React, { createContext, useState } from "react";
 
 export const QContext = createContext({
-  questions: [],
+  questions: [
+    {
+      type: "",
+      difficulty: "",
+      category: "",
+      question: "",
+      correct_answer: "",
+      incorrect_answers: ["", "", ""],
+    },
+  ],
   setQuestion: (param: []) => {},
 });
 
