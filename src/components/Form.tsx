@@ -50,7 +50,7 @@ const Form = ({ isStart }: Props) => {
           name="Category"
           ref={cateref}
         >
-          <option value="">Any Category</option>
+          <option value="">-</option>
           <option value={9}>General Knownledge</option>
           <option value={27}>Animals</option>
           <option value={15}>Video Games</option>
@@ -69,6 +69,7 @@ const Form = ({ isStart }: Props) => {
           defaultValue={10}
           ref={amtref}
           max={50}
+          required
         />
 
         <label htmlFor="Difficulty">Select Difficulty: </label>
@@ -76,7 +77,7 @@ const Form = ({ isStart }: Props) => {
           name="Difficulty"
           ref={diffref}
         >
-          <option value="">Any Difficulty</option>
+          <option value="">-</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
