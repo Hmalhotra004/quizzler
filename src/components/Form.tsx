@@ -27,9 +27,18 @@ const Form = ({ isStart }: Props) => {
   };
 
   const PullJson = async (amount: number, category: number, difficulty: string) => {
-    const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
-    // const api = `https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`;
+    let api;
+    if (category === 1000 && difficulty === "none") {
+      api = `https://opentdb.com/api.php?amount=${amount}&type=multiple`;
+    } else if (category === 1000) {
+      api = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
+    } else if (difficulty === "none") {
+      api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&type=multiple`;
+    } else {
+      api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+    }
 
+    console.log(api);
     await axios
       .get(api)
       .then(res => {
@@ -50,7 +59,7 @@ const Form = ({ isStart }: Props) => {
           name="Category"
           ref={cateref}
         >
-          <option value="">-</option>
+          <option value={1000}>Any Category</option>
           <option value={9}>General Knownledge</option>
           <option value={27}>Animals</option>
           <option value={15}>Video Games</option>
@@ -77,7 +86,7 @@ const Form = ({ isStart }: Props) => {
           name="Difficulty"
           ref={diffref}
         >
-          <option value="">-</option>
+          <option value="none">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
