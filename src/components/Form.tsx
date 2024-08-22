@@ -61,16 +61,16 @@ const Form = ({ isStart }: Props) => {
           ref={cateref}
         >
           <option value={1000}>Any Category</option>
+          <option value={15}>Video Games</option>
+          <option value={31}>Anime & Manga</option>
           <option value={9}>General Knownledge</option>
           <option value={27}>Animals</option>
-          <option value={15}>Video Games</option>
           <option value={12}>Music</option>
           <option value={18}>Science: Computers</option>
           <option value={17}>Science & Nature</option>
           <option value={21}>Sports</option>
           <option value={26}>Celebrities</option>
           <option value={28}>Vehicles</option>
-          <option value={31}>Anime & Manga</option>
         </select>
 
         <label htmlFor="Amount">No of Questions: </label>
