@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { useRef } from "react";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const Answers = ({ answers, selectedAns, answerState, onSelect, correctAns }: Props) => {
-  const shuffledAns = useRef<(string | null)[]>();
+  const shuffledAns = useRef<string[]>();
 
   if (!shuffledAns.current) {
     shuffledAns.current = [...answers];
@@ -44,12 +45,11 @@ const Answers = ({ answers, selectedAns, answerState, onSelect, correctAns }: Pr
             className="answer"
           >
             <button
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(answer) }}
               onClick={() => onSelect(answer)}
               className={`${cssClass} ${correctAnsClass} `}
               disabled={answerState !== ""}
-            >
-              {answer}
-            </button>
+            />
           </li>
         );
       })}

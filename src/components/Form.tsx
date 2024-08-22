@@ -38,6 +38,8 @@ const Form = ({ isStart }: Props) => {
       api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
     }
 
+    
+
     await axios
       .get(api)
       .then(res => {

@@ -10,13 +10,17 @@
   },
   "dependencies": {
     "axios": "^1.7.4",
+    "dompurify": "^3.1.6",
     "framer-motion": "^11.3.24",
+    "html-entities": "^2.5.2",
+    "html5-entities": "^1.0.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.77.8"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

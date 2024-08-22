@@ -1,6 +1,7 @@
 // import questions from "@/lib/questions";
 import { QContext } from "@/Context/QContext";
 import "@/styles/summary.scss";
+import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useContext } from "react";
 
@@ -58,8 +59,18 @@ const Summary = ({ userAnswers, setQuiz }: Props) => {
           return (
             <li key={idx}>
               <h3>{idx + 1}</h3>
-              <p className="question">{questions[idx].question}</p>
-              <p className={cssClass}>{answer ?? "Skipped"}</p>
+              <p
+                className="question"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questions[idx].question) }}
+              />
+              <p
+                className={cssClass}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize("Your Answer: " + `${answer ?? "Skipped"}`) }}
+              />
+              <p
+                className="correct user-answer"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize("Correct Answer: " + `${questions[idx].correct_answer}`) }}
+              />
             </li>
           );
         })}

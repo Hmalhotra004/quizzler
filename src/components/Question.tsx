@@ -1,4 +1,5 @@
 import { QContext } from "@/Context/QContext";
+import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import Answers from "./Answers";
 import QuestionTimer from "./QuestionTimer";
@@ -67,7 +68,7 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
         onTimeout={answer.selectedAns === "" && onSkipAns}
         mode={answerState}
       />
-      <h2>{questions[index].question}</h2>
+      <h2 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questions[index].question) }} />
       <Answers
         answers={questions[index].incorrect_answers.concat(questions[index].correct_answer)}
         selectedAns={answer.selectedAns}
