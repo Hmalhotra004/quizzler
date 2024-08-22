@@ -57,6 +57,8 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
     answerState = "answered";
   }
 
+  const correctAns = questions[index].correct_answer;
+
   return (
     <div id="question">
       <QuestionTimer
@@ -71,6 +73,7 @@ const Question = ({ index, onSelectAns, onSkipAns }: Props) => {
         selectedAns={answer.selectedAns}
         answerState={answerState}
         onSelect={handleSelectAns}
+        correctAns={correctAns}
       />
     </div>
   );

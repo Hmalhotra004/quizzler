@@ -5,9 +5,10 @@ type Props = {
   selectedAns: string | null;
   answerState: string;
   onSelect: (param: string | null) => void;
+  correctAns: string;
 };
 
-const Answers = ({ answers, selectedAns, answerState, onSelect }: Props) => {
+const Answers = ({ answers, selectedAns, answerState, onSelect, correctAns }: Props) => {
   const shuffledAns = useRef<(string | null)[]>();
 
   if (!shuffledAns.current) {
@@ -19,15 +20,24 @@ const Answers = ({ answers, selectedAns, answerState, onSelect }: Props) => {
     <ul id="answers">
       {shuffledAns.current.map(answer => {
         const isSelected = selectedAns === answer;
+        const isCorrect = answer === correctAns;
         let cssClass = "";
+        let correctAnsClass = "";
+
         if (answerState === "answered" && isSelected) {
           cssClass = "selected";
         }
 
-        if ((answerState === "correct" || answerState === "wrong") && isSelected) {
-          cssClass = answerState;
+        if (answerState === "correct" && isSelected) {
+          cssClass = "correct";
+        } else if (answerState === "wrong" && isSelected) {
+          cssClass = "wrong";
         }
 
+        // Highlight the correct answer in green if the answer state is "wrong"
+        if (answerState === "wrong" && isCorrect) {
+          correctAnsClass = "correct";
+        }
         return (
           <li
             key={answer}
@@ -35,7 +45,7 @@ const Answers = ({ answers, selectedAns, answerState, onSelect }: Props) => {
           >
             <button
               onClick={() => onSelect(answer)}
-              className={cssClass}
+              className={`${cssClass} ${correctAnsClass} `}
               disabled={answerState !== ""}
             >
               {answer}
